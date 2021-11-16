@@ -2,6 +2,7 @@ package com.example.loanagreementgenerator.domain;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
+@Builder
 @Validated
 @AllArgsConstructor
 public class LoanRequest {
