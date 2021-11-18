@@ -6,6 +6,7 @@ COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 COPY src ./src
 
+RUN mkdir -p /temp/agreements
 RUN ./mvnw clean
 RUN ./mvnw package -DskipTests
 

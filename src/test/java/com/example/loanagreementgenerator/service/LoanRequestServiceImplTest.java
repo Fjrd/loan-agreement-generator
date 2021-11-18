@@ -1,6 +1,5 @@
 package com.example.loanagreementgenerator.service;
 
-import com.example.loanagreementgenerator.LoanRequestMapper;
 import com.example.loanagreementgenerator.domain.LoanApprovalStatus;
 import com.example.loanagreementgenerator.domain.LoanRequest;
 import com.example.loanagreementgenerator.repository.LoanRequestRepository;
@@ -12,10 +11,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 class LoanRequestServiceImplTest {
@@ -23,31 +24,33 @@ class LoanRequestServiceImplTest {
     @Mock
     private LoanRequestRepository repository;
 
-    @Mock
-    private LoanRequestMapper mapper;
-
     @InjectMocks
     private LoanRequestServiceImpl service;
 
-    LoanRequest request = LoanRequest.builder()
-            .id(UUID.randomUUID())
-            .fullName("Vasiliy Vasil'evich Pupkin")
-            .amount(1000000.0)
-            .birthDate(LocalDate.of(1990, 12, 12))
-            .period(24)
-            .approvalStatus(LoanApprovalStatus.ОДОБРЕН)
-            .build();
+    LoanRequest request;
+
 
 
     @BeforeEach
     void setUp() {
-        service = new LoanRequestServiceImpl(repository, mapper);
+        service = new LoanRequestServiceImpl(repository);
+        request = LoanRequest.builder()
+                .id(UUID.randomUUID())
+                .fullName("Vasiliy Vasil'evich Pupkin")
+                .amount(1000000.0)
+                .birthDate(LocalDate.of(1990, 12, 12))
+                .period(24)
+                .approvalStatus(LoanApprovalStatus.ОДОБРЕН)
+                .build();
     }
 
     @SneakyThrows
     @Test
-    void generatePdfWorkCorrectlyTest() {
-        service.generatePdf(request);
-        //TODO refactor
+    void generatePdfWritesFileTest() {
+        File file = service.generateAndSavePdf(request);
+        byte[] bytes = Files.readAllBytes(file.toPath());
+        assertThat(bytes)
+                .isNotNull()
+                .isNotEmpty();
     }
 }

@@ -4,10 +4,10 @@ package com.example.loanagreementgenerator.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -16,10 +16,16 @@ import java.util.UUID;
 @Data
 @Builder
 @Validated
+@Entity
+@Table(name = "loan_requests", schema = "public")
 @AllArgsConstructor
+@NoArgsConstructor
 public class LoanRequest {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
+    @Column(name = "loan_request_id")
     private UUID id;
 
     @NotBlank
@@ -34,8 +40,6 @@ public class LoanRequest {
     @NotNull
     private Integer period;
 
-    @NotNull
     @Enumerated(value = EnumType.STRING)
     LoanApprovalStatus approvalStatus;
-
 }
