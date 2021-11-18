@@ -52,5 +52,7 @@ class LoanRequestServiceImplTest {
         assertThat(bytes)
                 .isNotNull()
                 .isNotEmpty();
+
+        Files.deleteIfExists(file.toPath());
     }
 }
