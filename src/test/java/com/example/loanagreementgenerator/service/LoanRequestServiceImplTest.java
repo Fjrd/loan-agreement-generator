@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -37,7 +38,7 @@ class LoanRequestServiceImplTest {
         request = LoanRequest.builder()
                 .id(UUID.randomUUID())
                 .fullName("Vasiliy Vasil'evich Pupkin")
-                .amount(1000000.0)
+                .amount(BigDecimal.valueOf(1000000.0))
                 .birthDate(LocalDate.of(1990, 12, 12))
                 .period(24)
                 .approvalStatus(LoanApprovalStatus.ОДОБРЕН)

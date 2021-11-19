@@ -29,7 +29,7 @@ public class LoanRequestController {
         byte[] file = service.findByIdAndGetAgreementPdf(id);
 
         return file == null ?
-                ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build() :
+                ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).header("cause", "credit not allowed").build() :
                 ResponseEntity.ok()
                         .header(HttpHeaders.CONTENT_DISPOSITION, "inline;attachment; filename=agreement.pdf")
                         .contentType(MediaType.APPLICATION_PDF)

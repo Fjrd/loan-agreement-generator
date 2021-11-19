@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -35,7 +36,7 @@ public class LoanRequest {
     private LocalDate birthDate;
 
     @NotNull
-    private Double amount;
+    private BigDecimal amount;
 
     @NotNull
     private Integer period;
