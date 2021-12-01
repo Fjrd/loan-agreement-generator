@@ -34,7 +34,7 @@ public class LoanRequestServiceImpl implements LoanRequestService{
 
         LoanRequest request = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id.toString()));
 
-        return request.getApprovalStatus() == LoanApprovalStatus.ОДОБРЕН ?
+        return request.getApprovalStatus() == LoanApprovalStatus.APPROVED ?
                 loadPdfFile(generateAndSavePdf(request)):
                 null;
 

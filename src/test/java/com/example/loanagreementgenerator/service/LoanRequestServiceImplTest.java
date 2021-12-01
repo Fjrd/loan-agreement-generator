@@ -41,7 +41,7 @@ class LoanRequestServiceImplTest {
                 .amount(BigDecimal.valueOf(1000000.0))
                 .birthDate(LocalDate.of(1990, 12, 12))
                 .period(24)
-                .approvalStatus(LoanApprovalStatus.ОДОБРЕН)
+                .approvalStatus(LoanApprovalStatus.APPROVED)
                 .build();
     }
 
